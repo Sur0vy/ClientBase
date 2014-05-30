@@ -586,6 +586,27 @@ inherited frFirmList: TfrFirmList
             Footers = <>
             Title.Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
             Width = 134
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CONTRACT_TYPE_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1058#1080#1087' '#1076#1086#1075#1086#1074#1086#1088#1072
+            Width = 149
+          end
+          item
+            EditButtons = <>
+            FieldName = 'AGREE_STATUS_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1057#1090#1072#1090#1091#1089' '#1076#1086#1075#1086#1074#1086#1088#1072
+            Width = 164
+          end
+          item
+            EditButtons = <>
+            FieldName = 'AGREES_COMMENT'
+            Footers = <>
+            Title.Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
+            Width = 211
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -669,6 +690,20 @@ inherited frFirmList: TfrFirmList
           end
           item
             EditButtons = <>
+            FieldName = 'DOC_TYPE_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1058#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+            Width = 200
+          end
+          item
+            EditButtons = <>
+            FieldName = 'AGREE_STATUS_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1057#1090#1072#1090#1091#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+            Width = 200
+          end
+          item
+            EditButtons = <>
             FieldName = 'CERTIFICATE'
             Footers = <>
             Title.Caption = #1057#1077#1088#1090#1080#1092#1080#1082#1072#1090
@@ -687,6 +722,13 @@ inherited frFirmList: TfrFirmList
             Footers = <>
             Title.Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
             Width = 134
+          end
+          item
+            EditButtons = <>
+            FieldName = 'DOCUM_COMMENT'
+            Footers = <>
+            Title.Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
+            Width = 200
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -1368,11 +1410,20 @@ inherited frFirmList: TfrFirmList
         'TE,'
       
         '  D.SOFT_DELIVERY_ID, D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICAT' +
-        'E, D.IS_DELETE'
+        'E, D.IS_DELETE,'
+      
+        '  SL.AGREE_STATUS_LIST_TITLE, TL.DOC_TYPE_LIST_TITLE,  D.DOCUM_C' +
+        'OMMENT'
       'from AGREES_LIST A'
       
         '  join SOFT_DELIVERY D    on ( D.AGREES_LIST_ID = A.AGREES_LIST_' +
         'ID )'
+      
+        '      left join AGREE_STATUS_LIST SL      on ( SL.AGREE_STATUS_L' +
+        'IST_ID   = D.AGREE_STATUS_LIST_ID )'
+      
+        '      left join DOC_TYPE_LIST TL      on ( TL.DOC_TYPE_LIST_ID  ' +
+        ' = D.DOC_TYPE_LIST_ID )'
       'where'
       '  D.IS_DELETE > 0 and'
       '  A.FIRM_LIST_ID = :FIRM_LIST_ID and'
@@ -1383,12 +1434,21 @@ inherited frFirmList: TfrFirmList
         '  A.AGREES_LIST_ID, A.FIRM_LIST_ID, A.AGREES_NUMBER, A.AGREES_DA' +
         'TE,'
       
-        '  D.SOFT_DELIVERY_ID, D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICAT' +
-        'E, D.IS_DELETE'
+        '  D.SOFT_DELIVERY_ID,  D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICA' +
+        'TE, D.IS_DELETE,'
+      
+        '  SL.AGREE_STATUS_LIST_TITLE, TL.DOC_TYPE_LIST_TITLE,  D.DOCUM_C' +
+        'OMMENT'
       'from AGREES_LIST A'
       
         '      join SOFT_DELIVERY D    on ( D.AGREES_LIST_ID = A.AGREES_L' +
         'IST_ID )'
+      
+        '      left join AGREE_STATUS_LIST SL      on ( SL.AGREE_STATUS_L' +
+        'IST_ID   = D.AGREE_STATUS_LIST_ID )'
+      
+        '      left join DOC_TYPE_LIST TL      on ( TL.DOC_TYPE_LIST_ID  ' +
+        ' = D.DOC_TYPE_LIST_ID )'
       'where'
       '  D.IS_DELETE > 0 and'
       '  A.FIRM_LIST_ID = :FIRM_LIST_ID'
@@ -1412,6 +1472,57 @@ inherited frFirmList: TfrFirmList
     WaitEndMasterScroll = True
     dcForceMasterRefresh = True
     dcForceOpen = True
+    object Q_DeliveryAGREES_LIST_ID: TFIBIntegerField
+      FieldName = 'AGREES_LIST_ID'
+    end
+    object Q_DeliveryFIRM_LIST_ID: TFIBIntegerField
+      FieldName = 'FIRM_LIST_ID'
+    end
+    object Q_DeliveryAGREES_NUMBER: TFIBStringField
+      FieldName = 'AGREES_NUMBER'
+      Size = 64
+      EmptyStrToNull = True
+    end
+    object Q_DeliveryAGREES_DATE: TFIBDateField
+      DefaultExpression = 'current_date'
+      FieldName = 'AGREES_DATE'
+      DisplayFormat = 'dd.mm.yyyy'
+    end
+    object Q_DeliverySOFT_DELIVERY_ID: TFIBIntegerField
+      FieldName = 'SOFT_DELIVERY_ID'
+    end
+    object Q_DeliveryDOCUM_NUMBER: TFIBStringField
+      FieldName = 'DOCUM_NUMBER'
+      EmptyStrToNull = True
+    end
+    object Q_DeliveryDOCUM_DATE: TFIBDateField
+      DefaultExpression = 'current_date'
+      FieldName = 'DOCUM_DATE'
+      DisplayFormat = 'dd.mm.yyyy'
+    end
+    object Q_DeliveryCERTIFICATE: TFIBStringField
+      FieldName = 'CERTIFICATE'
+      Size = 32
+      EmptyStrToNull = True
+    end
+    object Q_DeliveryIS_DELETE: TFIBIntegerField
+      FieldName = 'IS_DELETE'
+    end
+    object Q_DeliveryDOCUM_COMMENT: TFIBStringField
+      FieldName = 'DOCUM_COMMENT'
+      Size = 2048
+      EmptyStrToNull = True
+    end
+    object Q_DeliveryAGREE_STATUS_LIST_TITLE: TFIBStringField
+      FieldName = 'AGREE_STATUS_LIST_TITLE'
+      Size = 100
+      EmptyStrToNull = True
+    end
+    object Q_DeliveryDOC_TYPE_LIST_TITLE: TFIBStringField
+      FieldName = 'DOC_TYPE_LIST_TITLE'
+      Size = 100
+      EmptyStrToNull = True
+    end
   end
   object Q_Employee: TpFIBDataSet
     MDTSQLExecutor = se_Server
@@ -1458,18 +1569,36 @@ inherited frFirmList: TfrFirmList
       'select'
       
         '  A.AGREES_LIST_ID, A.FIRM_LIST_ID, A.AGREES_NUMBER, A.AGREES_DA' +
-        'TE, A.IS_DELETE'
+        'TE, A.IS_DELETE,'
+      
+        '  CT.CONTRACT_TYPE_LIST_TITLE, SL.AGREE_STATUS_LIST_TITLE, A.AGR' +
+        'EES_COMMENT'
       'from AGREES_LIST A'
+      
+        '  left join AGREE_STATUS_LIST SL on ( A.AGREE_STATUS_LIST_ID = S' +
+        'L.AGREE_STATUS_LIST_ID)'
+      
+        '  left join CONTRACT_TYPE_LIST CT on ( A.CONTRACT_TYPE_LIST_ID =' +
+        ' CT.CONTRACT_TYPE_LIST_ID)'
       'where'
-      '  A.FIRM_LIST_ID = :FIRM_LIST_ID and'
       '  A.IS_DELETE > 0 and'
+      '  A.FIRM_LIST_ID = :FIRM_LIST_ID and'
       '  A.AGREES_LIST_ID = :OLD_AGREES_LIST_ID')
     SelectSQL.Strings = (
       'select'
       
         '  A.AGREES_LIST_ID, A.FIRM_LIST_ID, A.AGREES_NUMBER, A.AGREES_DA' +
-        'TE, A.IS_DELETE'
+        'TE, A.IS_DELETE,'
+      
+        '  CT.CONTRACT_TYPE_LIST_TITLE, SL.AGREE_STATUS_LIST_TITLE, A.AGR' +
+        'EES_COMMENT'
       'from AGREES_LIST A'
+      
+        '  left join AGREE_STATUS_LIST SL on ( A.AGREE_STATUS_LIST_ID = S' +
+        'L.AGREE_STATUS_LIST_ID)'
+      
+        '  left join CONTRACT_TYPE_LIST CT on ( A.CONTRACT_TYPE_LIST_ID =' +
+        ' CT.CONTRACT_TYPE_LIST_ID)'
       'where'
       '  A.IS_DELETE > 0 and'
       '  A.FIRM_LIST_ID = :FIRM_LIST_ID'

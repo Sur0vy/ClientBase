@@ -47,11 +47,11 @@ const
   DebugUser = 'SYSDBA';
   DebugPass = 'masterkey';
 
-//  DebugUser = 'DAN';
+//  DebugUser = '';
 //  DebugPass = 'lsrmk273';
 
 //  ServName  = 'Firebird:Lsrm';
-  ServName  = 'Localhost:Lsrm';
+  ServName  = '192.168.0.111:Lsrm';
 {$ENDIF}
 
 var

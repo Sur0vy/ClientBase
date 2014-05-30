@@ -435,6 +435,13 @@ inherited frClienstList: TfrClienstList
             Width = 230
           end>
         object RowDetailData: TRowDetailPanelControlEh
+          object splKeys: TSplitter
+            Left = 0
+            Top = 0
+            Width = 5
+            Height = 0
+            ExplicitLeft = -5
+          end
         end
       end
     end
@@ -513,6 +520,20 @@ inherited frClienstList: TfrClienstList
             Footers = <>
             Title.Caption = #1053#1086#1084#1077#1088' '#1086#1090#1075#1088#1091#1079#1086#1095#1085#1086#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
             Width = 140
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CONTRACT_TYPE_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1058#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+            Width = 125
+          end
+          item
+            EditButtons = <>
+            FieldName = 'AGREE_STATUS_LIST_TITLE'
+            Footers = <>
+            Title.Caption = #1057#1090#1072#1090#1091#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+            Width = 113
           end
           item
             EditButtons = <>
@@ -1164,8 +1185,10 @@ inherited frClienstList: TfrClienstList
         '  cast( DATE_FORMAT( A.AGREES_NUMBER || '#39' '#1086#1090' dd.mm.yyyy'#39', A.AGRE' +
         'ES_DATE ) as varchar( 48 )) as AGREES_NUMBER,'
       
-        '  D.SOFT_DELIVERY_ID, D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICAT' +
-        'E,'
+        '  D.SOFT_DELIVERY_ID, CT.CONTRACT_TYPE_LIST_ID, CT.CONTRACT_TYPE' +
+        '_LIST_TITLE,'
+      '  SL.agree_status_list_id,  SL.agree_status_list_TITLE,'
+      'D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICATE,'
       '  F.FIRM_LIST_TITLE, F.FIRM_LIST_SHORT'
       'from SOFT_DELIVERY D'
       
@@ -1174,6 +1197,12 @@ inherited frClienstList: TfrClienstList
       
         '  left join FIRM_LIST F      on ( F.FIRM_LIST_ID   = A.FIRM_LIST' +
         '_ID )'
+      
+        '  left join contract_type_list CT      on ( CT.CONTRACT_TYPE_LIS' +
+        'T_ID = A.CONTRACT_TYPE_LIST_ID )'
+      
+        '  left join agree_status_list SL      on ( SL.agree_status_list_' +
+        'id = A.agree_status_list_id )'
       'where'
       '  D.IS_DELETE > 0 and'
       '  A.FIRM_LIST_ID = :FIRM_LIST_ID and'
@@ -1186,8 +1215,10 @@ inherited frClienstList: TfrClienstList
         '  cast( DATE_FORMAT( A.AGREES_NUMBER || '#39' '#1086#1090' dd.mm.yyyy'#39', A.AGRE' +
         'ES_DATE ) as varchar( 48 )) as AGREES_NUMBER,'
       
-        '  D.SOFT_DELIVERY_ID, D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICAT' +
-        'E,'
+        '  D.SOFT_DELIVERY_ID, CT.CONTRACT_TYPE_LIST_ID, CT.CONTRACT_TYPE' +
+        '_LIST_TITLE,'
+      '  SL.agree_status_list_id,  SL.agree_status_list_TITLE,'
+      '  D.DOCUM_NUMBER, D.DOCUM_DATE, D.CERTIFICATE,'
       '  F.FIRM_LIST_TITLE, F.FIRM_LIST_SHORT'
       'from SOFT_DELIVERY D'
       
@@ -1196,6 +1227,12 @@ inherited frClienstList: TfrClienstList
       
         '  left join FIRM_LIST F      on ( F.FIRM_LIST_ID   = A.FIRM_LIST' +
         '_ID )'
+      
+        '  left join contract_type_list CT      on ( CT.CONTRACT_TYPE_LIS' +
+        'T_ID = A.CONTRACT_TYPE_LIST_ID )'
+      
+        '  left join agree_status_list SL      on ( SL.agree_status_list_' +
+        'id = A.agree_status_list_id )'
       'where'
       '  D.IS_DELETE > 0 and'
       '  A.FIRM_LIST_ID = :FIRM_LIST_ID'

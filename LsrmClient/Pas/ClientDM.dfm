@@ -3,7 +3,7 @@ object frDM: TfrDM
   Height = 545
   Width = 723
   object IBDB: TpFIBDatabase
-    DBName = 'DOM-L:LsrmUser---'
+    DBName = '192.168.0.111:Lsrm'
     DBParams.Strings = (
       'user_name=sysdba'
       'password=masterkey'

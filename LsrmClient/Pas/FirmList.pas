@@ -77,6 +77,18 @@ type
     A_AddCopyDelivery: TAction;
     A_NewClient: TAction;
     A_EditClient: TAction;
+    Q_DeliveryAGREES_LIST_ID: TFIBIntegerField;
+    Q_DeliveryFIRM_LIST_ID: TFIBIntegerField;
+    Q_DeliveryAGREES_NUMBER: TFIBStringField;
+    Q_DeliveryAGREES_DATE: TFIBDateField;
+    Q_DeliverySOFT_DELIVERY_ID: TFIBIntegerField;
+    Q_DeliveryDOCUM_NUMBER: TFIBStringField;
+    Q_DeliveryDOCUM_DATE: TFIBDateField;
+    Q_DeliveryCERTIFICATE: TFIBStringField;
+    Q_DeliveryIS_DELETE: TFIBIntegerField;
+    Q_DeliveryDOCUM_COMMENT: TFIBStringField;
+    Q_DeliveryAGREE_STATUS_LIST_TITLE: TFIBStringField;
+    Q_DeliveryDOC_TYPE_LIST_TITLE: TFIBStringField;
     procedure FormActivate(Sender: TObject); override;
     procedure PCChanging(Sender: TObject; var AllowChange: Boolean);
     procedure PCChange(Sender: TObject);

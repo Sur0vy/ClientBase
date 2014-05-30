@@ -67,6 +67,7 @@ type
     A_EditClientTraining: TAction;
     A_DelClientTraining: TAction;
     A_AddClientTraining: TAction;
+    splKeys: TSplitter;
     procedure PCChange(Sender: TObject);
     procedure PCChanging(Sender: TObject; var AllowChange: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

@@ -43,6 +43,20 @@ inherited frSoftDelivery: TfrSoftDelivery
       end
       item
         EditButtons = <>
+        FieldName = 'DOC_TYPE_LIST_TITLE'
+        Footers = <>
+        Title.Caption = #1058#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+        Width = 136
+      end
+      item
+        EditButtons = <>
+        FieldName = 'AGREE_STATUS_LIST_TITLE'
+        Footers = <>
+        Title.Caption = #1057#1090#1072#1090#1091#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+        Width = 119
+      end
+      item
+        EditButtons = <>
         FieldName = 'AGREES_NUMBER'
         Footers = <>
         Title.Caption = #1053#1086#1084#1077#1088' '#1076#1086#1075#1086#1074#1086#1088#1072
@@ -69,6 +83,13 @@ inherited frSoftDelivery: TfrSoftDelivery
         Title.Caption = #1055#1086#1083#1085#1086#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1080
         Visible = False
         Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DOCUM_COMMENT'
+        Footers = <>
+        Title.Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
+        Width = 153
       end>
   end
   object dbgProductList: TDBGridEh [3]
