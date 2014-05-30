@@ -1,0 +1,19 @@
+[Base]
+Path = DOM-L:LsrmUser
+[USER]
+Login = 'SYSDBA'
+Pass = 'masterkey'
+Role = ''
+[MAIL_SERVER]
+ServerName = smtp.yandex.ru
+Domain = qip.ru
+Port = 465
+Login = 'ltetenev'
+Pass = '4re859y2ux'
+User = OOO "ЛСРМ"
+FromAddress = ltetenev@narod.ru
+[TEST_MODE]
+;Если указан адрес в Test_Mode, то все посылается на него
+;Нужен только для тестирования чтобы не спамить клиентов
+;Для реальной рассылки ремировать
+E_Mail = ltetenev@narod.ru

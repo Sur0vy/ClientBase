@@ -1,0 +1,18 @@
+[Base]
+Path = DOM-L:LsrmUser
+[USER]
+Login = 'SYSDBA'
+Pass = 'masterkey'
+Role = ''
+[MAIL_SERVER]
+ServerName = smtp.qip.ru
+Domain = qip.ru
+Port = 25
+Login = '410223969'
+Pass = '4re859y2ux'
+User = OOO "ЛСРМ"
+FromAddress = 410223969@qip.ru
+[TEST_MODE]
+;Если указан адрес в Test_Mode, то все посылается на него
+;Нужен только для тестирования чтобы не спамить клиентов
+E_Mail = ltetenev@narod.ru
